@@ -4,6 +4,7 @@ setup(
     name='pywc',
     version='1.0.0',
     packages=find_packages(),
+    install_requires=['Gooey>=1.0.1'],
     entry_points={
         'console_scripts': [
             'pywc = pywc.__main__:cli'
