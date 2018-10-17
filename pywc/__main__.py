@@ -1,29 +1,17 @@
 """
-Script to mostly mimic the `wc` command in Unix on all platforms
+CLI interface to wc package
 """
 
 import argparse
-import collections
 import os
 import sys
 
-file_info = collections.namedtuple('file_info', 'lines words')
+from pywc import api
 
 
-def get_file_info(file_):
-    lines = 0
-    words = 0
-
-    with open(file_, 'r', encoding='utf-8') as file_obj:
-        for line in file_obj:
-            lines += 1
-            words += len(line.split())
-
-    return file_info(lines, words)
-
-
-def parse_args():
+def cli():
     parser = argparse.ArgumentParser(
+        prog='pywc',
         description='Count lines/words in files or directory')
 
     parser.add_argument(
@@ -48,31 +36,20 @@ def parse_args():
         args['count_words'] = True
         args['count_lines'] = True
 
-    return args
-
-
-def main(arg, count_words, count_lines):
-    results = []
-
-    if os.path.isfile(arg):
-        results.append((arg, get_file_info(arg)))
+    if os.path.isfile(args['arg']):
+        results = [(args['arg'], api.get_file_info(args['arg']))]
     else:
-        for item in os.listdir(arg):
-            file_ = os.path.join(arg, item)
-            if not os.path.isfile(file_):
-                continue
-
-            results.append((file_, get_file_info(file_)))
+        results = api.get_directory_info(args['arg'])
 
     for arg, result in results:
-        if count_lines:
+        if args['count_lines']:
             print(f'    {result.lines}', end='')
 
-        if count_words:
+        if args['count_words']:
             print(f'    {result.words}', end='')
 
         print(f'    {arg}')
 
 
-args = parse_args()
-main(args['arg'], args['count_words'], args['count_lines'])
+if __name__ == '__main__':
+    cli()
