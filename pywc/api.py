@@ -19,7 +19,7 @@ def get_file_info(file_):
     lines = 0
     words = 0
 
-    with open(file_, 'r', encoding='utf-8') as file_obj:
+    with open(file_, 'rb') as file_obj:
         for line in file_obj:
             lines += 1
             words += len(line.split())
