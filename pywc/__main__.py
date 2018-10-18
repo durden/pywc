@@ -48,7 +48,7 @@ def cli(allow_gui_option=True):
         description='Count lines/words in files or directory')
 
     parser.add_argument(
-        'arg', action='store',
+        'arg', action='store', nargs='?', default=f'{os.getcwd()}',
         help='File or directory to count lines/words for')
 
     parser.add_argument(
