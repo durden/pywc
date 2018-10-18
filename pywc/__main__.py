@@ -6,10 +6,18 @@ import argparse
 import os
 import sys
 
-from gooey import Gooey
-from gooey.python_bindings.gooey_decorator import IGNORE_COMMAND
+try:
+    # Don't require Gooey unless requesting GUI interface
+    from gooey import Gooey
+    from gooey.python_bindings.gooey_decorator import IGNORE_COMMAND
+except ImportError:
+    Gooey = None
+    IGNORE_COMMAND = None
 
 from pywc import api
+
+# Attribute added by PyInstaller
+FROZEN = getattr(sys, 'frozen', False)
 
 
 def gui():
@@ -23,7 +31,15 @@ def gui():
     def cli_only():
         return cli(allow_gui_option=False)
 
-    return Gooey(cli_only, show_success_modal=False)()
+    if FROZEN:
+        target = None
+    else:
+        # Tell Gooey how to run us otherwise it will try to run this file
+        # directly and we won't be inside of a package.  This provides parity
+        # between how the GUI runs vs. the CLI.  They both use -m.
+        target = f'{sys.executable} -m {__package__}'
+
+    return Gooey(cli_only, show_success_modal=False, target=target)()
 
 
 def cli(allow_gui_option=True):
@@ -51,7 +67,7 @@ def cli(allow_gui_option=True):
     # Gooey puts this in when it re-runs itself, but we're not using this
     # option because we want the default of the app to run without a GUI. Gooey
     # defaults to using the GUI, not the other way around.
-    if IGNORE_COMMAND in sys.argv:
+    if IGNORE_COMMAND and IGNORE_COMMAND in sys.argv:
         sys.argv.remove(IGNORE_COMMAND)
 
     # Using vars() to turn namespace object returned by parse_args() into a
@@ -59,8 +75,6 @@ def cli(allow_gui_option=True):
     args = vars(parser.parse_args())
 
     if args['use_gui']:
-        sys.argv.remove('-g')
-        # Let Gooey run us
         gui()
         return
 
