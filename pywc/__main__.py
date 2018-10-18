@@ -70,16 +70,20 @@ def cli(allow_gui_option=True):
         args['count_words'] = True
         args['count_lines'] = True
 
-    if os.path.isfile(args['arg']):
-        results = [(args['arg'], api.get_file_info(args['arg']))]
+    main(args['arg'], args['count_lines'], args['count_words'])
+
+
+def main(arg, count_lines, count_words):
+    if os.path.isfile(arg):
+        results = [(arg, api.get_file_info(arg))]
     else:
-        results = api.get_directory_info(args['arg'])
+        results = api.get_directory_info(arg)
 
     for arg, result in results:
-        if args['count_lines']:
+        if count_lines:
             print(f'    {result.lines}', end='')
 
-        if args['count_words']:
+        if count_words:
             print(f'    {result.words}', end='')
 
         print(f'    {arg}')
