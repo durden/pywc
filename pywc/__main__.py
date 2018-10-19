@@ -14,7 +14,7 @@ except ImportError:
     Gooey = None
     IGNORE_COMMAND = None
 
-from pywc import api
+from . import api
 
 # Attribute added by PyInstaller
 FROZEN = getattr(sys, 'frozen', False)

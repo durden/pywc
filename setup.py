@@ -8,6 +8,9 @@ setup(
     entry_points={
         'console_scripts': [
             'pywc = pywc.__main__:cli'
+        ],
+        'gui_scripts': [
+            'pywcg = pywc.__main__:gui'
         ]
     },
 )
