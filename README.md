@@ -25,5 +25,9 @@ Script, Library, or Executable: You can have it all!](https://de.pycon.org/sched
     - This works from any current working directory if installed in step 2
       otherwise it will only work when in the checked out directory.
 
+## Creating executables
+
+- See [Makefile](Makefile)
+
 ## References/feedback
 - [Gist link](http://bit.ly/pyconde_pywc_refs)
