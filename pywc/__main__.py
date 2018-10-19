@@ -39,7 +39,10 @@ def gui():
         # between how the GUI runs vs. the CLI.  They both use -m.
         target = f'{sys.executable} -m {__package__}'
 
-    return Gooey(cli_only, show_success_modal=False, target=target)()
+    return Gooey(cli_only,
+                 program_name='pywc',
+                 show_success_modal=False,
+                 target=target)()
 
 
 def cli(allow_gui_option=True):
