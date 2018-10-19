@@ -77,17 +77,16 @@ def cli(allow_gui_option=True):
     # dict.
     args = vars(parser.parse_args())
 
-    if args['use_gui']:
-        gui()
-        return
-
     # Mimic wc command by printing both of these if there are no other
     # arguments
     if not args['count_words'] and not args['count_lines']:
         args['count_words'] = True
         args['count_lines'] = True
 
-    main(args['arg'], args['count_lines'], args['count_words'])
+    if args.get('use_gui', False):
+        gui()
+    else:
+        main(args['arg'], args['count_lines'], args['count_words'])
 
 
 def main(arg, count_lines, count_words):
