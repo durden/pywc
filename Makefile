@@ -6,5 +6,8 @@ gui: clean
 
 exes: cli gui
 
+install:
+	pip install .
+
 clean:
 	rm -fr dist/ build/

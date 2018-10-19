@@ -17,17 +17,32 @@ Script, Library, or Executable: You can have it all!](https://de.pycon.org/sched
 - `python3 -m venv <directory>`
 
 ### 2. Install pywc into environment
+
 - `cd` into checked out folder
-- `pip install . `
+- `pip install . ` or `make install`
 
 ## Usage
+
 - `python -m pywc -h`
     - This works from any current working directory if installed in step 2
       otherwise it will only work when in the checked out directory.
 
+### Entry points
+
+- `python -m pywc`
+- `python -m pywc -g`
+- `pywc` (when installed)
+- `pywc -g` (when installed)
+- `python cli.py`
+- `python gui.py`
+- `pywc.exe` (when exe is built)
+- `pywcg.exe` (when exe is built)
+
 ## Creating executables
 
 - See [Makefile](Makefile)
+- The resulting exes will go in the `dist/` folder
 
 ## References/feedback
+
 - [Gist link](http://bit.ly/pyconde_pywc_refs)
