@@ -64,7 +64,7 @@ def cli(allow_gui_option=True):
 
     if allow_gui_option:
         parser.add_argument(
-            '-g', dest='use_gui', action='store_true', default=False,
+            '--gui', dest='use_gui', action='store_true', default=False,
             help='Use GUI to run application')
 
     # Gooey puts this in when it re-runs itself, but we're not using this

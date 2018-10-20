@@ -30,9 +30,9 @@ Script, Library, or Executable: You can have it all!](https://de.pycon.org/sched
 ### Entry points
 
 - `python -m pywc`
-- `python -m pywc -g`
+- `python -m pywc --gui`
 - `pywc` (when installed)
-- `pywc -g` (when installed)
+- `pywc --gui` (when installed)
 - `python cli.py`
 - `python gui.py`
 - `pywc.exe` (when exe is built)
