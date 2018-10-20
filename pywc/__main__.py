@@ -95,14 +95,28 @@ def main(arg, count_lines, count_words):
     else:
         results = api.get_directory_info(arg)
 
+    width = 5
+    total_lines = 0
+    total_words = 0
+
     for arg, result in results:
         if count_lines:
-            print(f'    {result.lines}', end='')
+            total_lines += result.lines
+            print(f'    {result.lines:{width}}', end='')
 
         if count_words:
-            print(f'    {result.words}', end='')
+            total_words += result.words
+            print(f'    {result.words:{width}}', end='')
 
         print(f'    {arg}')
+
+    if count_lines:
+        print(f'    {total_lines:{width}}', end='')
+
+    if count_words:
+        print(f'    {total_words:{width}}', end='')
+
+    print(f'    total')
 
 
 if __name__ == '__main__':
