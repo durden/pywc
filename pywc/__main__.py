@@ -26,6 +26,9 @@ def gui():
     the GUI as an option.
     """
 
+    if None in (Gooey, IGNORE_COMMAND):
+        raise EnvironmentError('Requires Gooey library')
+
     # This is a perfect setup for functools.partial, but Gooey wants a real
     # function not a partial object
     def cli_only():
@@ -62,7 +65,7 @@ def cli(allow_gui_option=True):
         '-l', dest='count_lines', action='store_true', default=False,
         help='Show number of lines in file(s)')
 
-    if allow_gui_option:
+    if allow_gui_option and Gooey and IGNORE_COMMAND:
         parser.add_argument(
             '--gui', dest='use_gui', action='store_true', default=False,
             help='Use GUI to run application')
