@@ -1,7 +1,7 @@
 # Script, Library, or Executable: You can have it all!
 
 This repository is a sample application used during the [PyconDE talk titled
-Script, Library, or Executable: You can have it all!](https://de.pycon.org/schedule/talks/script-library-or-executable-you-can-have-it-all/).
+Script, Library, or Executable: You can have it all!](https://pyvideo.org/pycon-de-2018/script-library-or-executable-you-can-have-it-all.html).
 
 ## Requirements
 
